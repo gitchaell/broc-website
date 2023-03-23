@@ -1,0 +1,36 @@
+{
+	"extends": [
+		"react-app",
+		"react-app/jest",
+		"plugin:prettier/recommended"
+	],
+	"plugins": [
+		"react",
+		"react-hooks"
+	],
+	"rules": {
+		"react/jsx-filename-extension": [
+			"error",
+			{
+				"extensions": [
+					".tsx"
+				]
+			}
+		],
+		"import/prefer-default-export": "off",
+		"react-hooks/rules-of-hooks": "error",
+		"react-hooks/exhaustive-deps": "warn"
+	},
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [
+					".js",
+					".jsx",
+					".ts",
+					".tsx"
+				]
+			}
+		}
+	}
+}
