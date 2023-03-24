@@ -17,7 +17,7 @@ interface LoginFormValues {
 
 const initialValues: LoginFormValues = {
 	email: 'admin@brochurist.com',
-	password: '12345678',
+	password: 'brochurist!!!!!!!!',
 	rememberMe: false,
 };
 

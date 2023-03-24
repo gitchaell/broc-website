@@ -1,5 +1,5 @@
 export const reportWebVitals = () => {
-	const reportHandler = console.log;
+	const reportHandler = () => {};
 
 	import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
 		getCLS(reportHandler);

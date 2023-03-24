@@ -1,5 +1,5 @@
-export const enum ListingStatus {
+export enum ListingStatus {
 	ACTIVE = 'ACTIVE',
-	UDNER_CONTRACT = 'UDNER_CONTRACT',
+	UNDER_CONTRACT = 'UNDER_CONTRACT',
 	CLOSED = 'CLOSED',
 }

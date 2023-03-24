@@ -1,2 +1,2 @@
 export * from './auth.provider';
-export * from './jwt';
+export * from './listing.provider';

@@ -1,11 +1,11 @@
 import { Listing } from './Listing';
 
 export type Brochure = {
-	id?: string;
+	id?: number;
 	imageURL?: string;
 	status?: string;
 	createdAt?: Date;
 	updatedAt?: Date;
 	listing?: Listing;
-	listingId?: string;
+	listingId?: number;
 };

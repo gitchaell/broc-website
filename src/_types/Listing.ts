@@ -4,7 +4,7 @@ import { PropertyType } from './PropertyType';
 import { User } from './User';
 
 export type Listing = {
-	id?: string;
+	id?: number;
 	propertyAddress?: string;
 	propertyType?: PropertyType;
 	price?: number;
@@ -12,6 +12,6 @@ export type Listing = {
 	createdAt?: Date;
 	updatedAt?: Date;
 	publisher?: User;
-	publisherId?: string;
+	publisherId?: number;
 	brochures?: Array<Brochure>;
 };

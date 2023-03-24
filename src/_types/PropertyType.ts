@@ -1,4 +1,4 @@
-export const enum PropertyType {
+export enum PropertyType {
 	CONDO = 'CONDO',
 	DETACHED_SINGLE_FAMILY = 'DETACHED_SINGLE_FAMILY',
 	MULTI_UNIT = 'MULTI_UNIT',

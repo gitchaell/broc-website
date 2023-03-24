@@ -1,10 +1,29 @@
+import { useNavigate } from 'react-router-dom';
+// primereact
+import { Button } from 'primereact/button';
+import { Card } from 'primereact/card';
+
 export const NotFound = () => {
+	const navigate = useNavigate();
+
 	return (
-		<div className="h-screen surface-ground px-4 py-8 md:px-6 lg:px-8 flex align-items-center justify-content-center">
-			<div className="surface-card p-4 shadow-2 border-round w-full lg:w-4">
-				<h1>Page Not Found</h1>
-				<h3>Sorry, we couldn't find the page.</h3>
-			</div>
+		<div className="flex h-screen justify-content-center align-items-center">
+			<Card className="mb-3 shadow-4" style={{ width: '500px' }}>
+				<h1 className="text-center mb-4">Oops! Page Not Found</h1>
+				<div className="flex justify-content-center gap-2">
+					<Button
+						label="Go Back"
+						icon="pi pi-arrow-left"
+						severity="secondary"
+						outlined
+					/>
+					<Button
+						label="Go Home"
+						icon="pi pi-home"
+						onClick={() => navigate('/home')}
+					/>
+				</div>
+			</Card>
 		</div>
 	);
 };

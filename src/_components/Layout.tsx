@@ -1,111 +1,104 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+// primereact
+import { MegaMenu } from 'primereact/megamenu';
+import { MenuItem } from 'primereact/menuitem';
+import { Avatar } from 'primereact/avatar';
+import { BreadCrumb } from 'primereact/breadcrumb';
+// assets
 import { Logo } from '../assets/logo';
 
-export const Layout = () => {
-	return (
-		<div className="min-h-screen flex flex-column">
-			<div className="bg-gray-900" style={{ height: '250px' }}>
-				<div
-					className="py-3 px-5 flex align-items-center justify-content-between relative lg:static"
-					style={{ minHeight: '80px' }}
-				>
-					<Logo height={40} />
-					<a
-						href="/listing"
-						className="p-ripple cursor-pointer block lg:hidden text-gray-400"
+export const Header = () => {
+	const location = useLocation();
+	const navigate = useNavigate();
+
+	const menuItems: Array<MenuItem> = [
+		{
+			template() {
+				return (
+					<div onClick={() => navigate('/home')}>
+						<span className="p-menuitem-icon pi pi-fw pi-home text-white"></span>
+						<span className="p-menuitem-text text-white">Home</span>
+					</div>
+				);
+			},
+			items: undefined,
+		},
+		{
+			template() {
+				return (
+					<div onClick={() => navigate('/listing')}>
+						<span className="p-menuitem-icon pi pi-fw pi-users text-white"></span>
+						<span className="p-menuitem-text text-white">Listings</span>
+					</div>
+				);
+			},
+			items: undefined,
+		},
+		{
+			template() {
+				return (
+					<div onClick={() => navigate('/brochure')}>
+						<span className="p-menuitem-icon pi pi-fw pi-shopping-cart text-white"></span>
+						<span className="p-menuitem-text text-white">Brochure</span>
+					</div>
+				);
+			},
+			items: undefined,
+		},
+		{
+			template() {
+				return (
+					<div onClick={() => navigate('/messages')}>
+						<span className="p-menuitem-icon pi pi-fw pi-comments text-white"></span>
+						<span className="p-menuitem-text text-white">Messages</span>
+					</div>
+				);
+			},
+			items: undefined,
+		},
+	];
+
+	const getBreadcrumbItems = (): Array<MenuItem> => {
+		const pathnames = location.pathname.split('/').filter(x => x);
+
+		return pathnames.map((pathname, i) => ({
+			url: `/${pathnames.slice(0, i + 1).join('/')}`,
+			template() {
+				return (
+					<span
+						className="p-menuitem-text text-white cursor-pointer"
+						onClick={() => navigate(`/${pathnames.slice(0, i + 1).join('/')}`)}
 					>
-						<i className="pi pi-bars text-4xl"></i>
-						<span role="presentation" className="p-ink"></span>
-					</a>
-					<div className="align-items-center flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full bg-gray-900 left-0 top-100 z-1">
-						<ul className="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row">
-							<li>
-								<a
-									href="/listing"
-									className="p-ripple flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-400 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-150"
-								>
-									<i className="pi pi-home mr-2"></i>
-									<span>Home</span>
-									<span role="presentation" className="p-ink"></span>
-								</a>
-							</li>
-							<li>
-								<a
-									href="/listing"
-									className="p-ripple flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-400 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-150"
-								>
-									<i className="pi pi-users mr-2"></i>
-									<span>Customers</span>
-									<i className="pi pi-angle-down ml-auto lg:ml-3"></i>
-									<span role="presentation" className="p-ink"></span>
-								</a>
-								<ul className="list-none py-3 px-6 m-0 lg:px-0 lg:py-0 border-round shadow-0 lg:shadow-2 lg:absolute bg-gray-900 hidden origin-top w-full lg:w-15rem cursor-pointer lg:border-1 border-gray-800">
-									<li>
-										<a
-											href="/listing"
-											className="p-ripple flex p-3 align-items-center text-gray-400 hover:text-white hover:bg-gray-800 transition-colors transition-duration-150"
-										>
-											<i className="pi pi-user-plus mr-2"></i>
-											<span className="font-medium">Add New</span>
-											<span role="presentation" className="p-ink"></span>
-										</a>
-									</li>
-									<li className="relative">
-										<a
-											href="/listing"
-											className="p-ripple flex p-3 align-items-center text-gray-400 hover:text-white hover:bg-gray-800 transition-colors transition-duration-150"
-										>
-											<i className="pi pi-search mr-2"></i>
-											<span className="font-medium">Search</span>
-											<i className="pi pi-angle-down ml-auto lg:-rotate-90"></i>
-											<span role="presentation" className="p-ink"></span>
-										</a>
-										<ul className="list-none py-3 pl-3 m-0 lg:px-0 lg:py-0 border-round shadow-0 lg:shadow-2 lg:absolute bg-gray-900 hidden origin-top w-full lg:w-15rem cursor-pointer left-100 top-0 lg:border-1 border-gray-800">
-											<li>
-												<a
-													href="/listing"
-													className="p-ripple flex p-3 align-items-center text-gray-400 hover:text-white hover:bg-gray-800 transition-colors transition-duration-150"
-												>
-													<i className="pi pi-shopping-cart mr-2"></i>
-													<span className="font-medium">Purchases</span>
-													<span role="presentation" className="p-ink"></span>
-												</a>
-											</li>
-											<li className="relative">
-												<a
-													href="/listing"
-													className="p-ripple flex p-3 align-items-center text-gray-400 hover:text-white hover:bg-gray-800 transition-colors transition-duration-150"
-												>
-													<i className="pi pi-comments mr-2"></i>
-													<span className="font-medium">Messages</span>
-													<span role="presentation" className="p-ink"></span>
-												</a>
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<a
-									href="/listing"
-									className="p-ripple flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-400 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-150"
-								>
-									<i className="pi pi-calendar mr-2"></i>
-									<span>Calendar</span>
-									<span role="presentation" className="p-ink"></span>
-								</a>
-							</li>
-							<li>
-								<a
-									href="/listing"
-									className="p-ripple flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-gray-400 hover:text-white hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-150"
-								>
-									<i className="pi pi-chart-line mr-2"></i>
-									<span>Stats</span>
-									<span role="presentation" className="p-ink"></span>
-								</a>
-							</li>
-						</ul>
+						{pathname.charAt(0).toUpperCase() + pathname.slice(1)}
+					</span>
+				);
+			},
+		}));
+	};
+
+	const home: MenuItem = {
+		template() {
+			return (
+				<span
+					className="p-menuitem-icon pi pi-home text-white cursor-pointer"
+					onClick={() => navigate('/home')}
+				></span>
+			);
+		},
+	};
+
+	return (
+		<div className="bg-gray-900" style={{ height: '250px' }}>
+			<div
+				className="py-3 px-5 flex align-items-center relative lg:static"
+				style={{ minHeight: '80px' }}
+			>
+				<MegaMenu
+					className="w-full bg-gray-900"
+					model={menuItems}
+					orientation="horizontal"
+					start={<Logo height={40} />}
+					end={
 						<ul className="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row border-top-1 border-gray-800 lg:border-top-none">
 							<li>
 								<a
@@ -134,80 +127,80 @@ export const Layout = () => {
 									href="/listing"
 									className="p-ripple flex px-6 p-3 lg:px-3 lg:py-2 align-items-center hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-150"
 								>
-									<img
-										src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg?fit=640,427"
-										alt="profile"
-										className="mr-3 lg:mr-0"
-										style={{
-											width: '32px',
-											height: '32px',
-											objectFit: 'cover',
-											borderRadius: '25px',
-										}}
+									<Avatar
+										className="p-overlay-badge"
+										icon="pi pi-user"
+										size="large"
+										imageAlt="avatar"
+										shape="square"
 									/>
-									<div className="block lg:hidden">
-										<div className="text-white font-medium">
-											Josephine Lillard
-										</div>
-										<span className="text-gray-400 font-medium text-sm">
-											Marketing Specialist
-										</span>
-									</div>
-									<span role="presentation" className="p-ink"></span>
 								</a>
 							</li>
 						</ul>
+					}
+					breakpoint="960px"
+				/>
+			</div>
+
+			<BreadCrumb
+				className="bg-gray-900 px-5"
+				model={getBreadcrumbItems()}
+				home={home}
+			/>
+		</div>
+	);
+};
+
+export const Footer = () => {
+	return (
+		<div className="bg-gray-900 px-4 md:px-6 lg:px-8">
+			<div className="py-6 flex flex-column sm:flex-row sm:align-items-center justify-content-between">
+				<div>
+					<Logo height={40} />
+					<div className="mt-2 line-height-3 text-white">
+						© {new Date().getFullYear()} Brochurist, Inc. All rights reserved
 					</div>
 				</div>
-				<ul className="list-none py-3 px-5 m-0 flex align-items-center font-medium overflow-x-auto border-top-1 border-gray-800">
-					<li className="pr-3">
-						<a href="/listing" className="cursor-pointer">
-							<i className="pi pi-home text-gray-400"></i>
-						</a>
-					</li>
-					<li className="px-2">
-						<i className="pi pi-angle-right text-gray-400"></i>
-					</li>
-					<li className="px-2">
-						<a
-							href="/listing"
-							className="cursor-pointer text-gray-400 white-space-nowrap"
-						>
-							Level 3
-						</a>
-					</li>
-					<li className="px-2">
-						<i className="pi pi-angle-right text-gray-400"></i>
-					</li>
-					<li className="px-2">
-						<a
-							href="/listing"
-							className="cursor-pointer text-gray-400 white-space-nowrap"
-						>
-							Level 2
-						</a>
-					</li>
-					<li className="px-2">
-						<i className="pi pi-angle-right text-gray-400"></i>
-					</li>
-					<li className="px-2">
-						<a
-							href="/listing"
-							className="cursor-pointer text-indigo-300 white-space-nowrap"
-						>
-							Level 1
-						</a>
-					</li>
-				</ul>
+				<div className="mt-3 sm:mt-0">
+					<a
+						href="/"
+						className="cursor-pointer text-500 transition-colors transition-duration-150 hover:text-700"
+					>
+						<i className="pi pi-twitter text-xl text-white"></i>
+					</a>
+					<a
+						href="/"
+						className="cursor-pointer text-500 ml-3 transition-colors transition-duration-150 hover:text-700"
+					>
+						<i className="pi pi-facebook text-xl text-white"></i>
+					</a>
+					<a
+						href="/"
+						className="cursor-pointer text-500 ml-3 transition-colors transition-duration-150 hover:text-700"
+					>
+						<i className="pi pi-github text-xl text-white"></i>
+					</a>
+				</div>
 			</div>
+		</div>
+	);
+};
+
+export const Layout = () => {
+	return (
+		<div className="min-h-screen flex flex-column">
+			<Header />
+
 			<div
 				className="p-5 flex flex-column flex-auto"
-				style={{ marginTop: '-8rem' }}
+				style={{ marginTop: '-7rem' }}
 			>
-				<div className="border-round surface-section flex-auto">
+				<div className="flex-auto surface-card p-4 shadow-2 border-round">
 					<Outlet />
 				</div>
 			</div>
+
+			<Footer />
 		</div>
 	);
 };
